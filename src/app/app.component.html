@@ -3,7 +3,7 @@
     There are no wishes to display
   </div>
 
-  <ul class="wish-list">
+  <ul *ngIf="items.length > 0" class="wish-list">
     <li class="form-check" *ngFor="let item of items">
       <label class="form-check-label">
         <input type="checkbox" class="checkbox">
