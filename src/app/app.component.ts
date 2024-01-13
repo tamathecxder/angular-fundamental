@@ -4,6 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../shared/models/wishitem';
 import { FormsModule } from '@angular/forms';
 
+const filters = [
+  (items: WishItem) => items,
+  (items: WishItem) => !items.isComplete,
+  (items: WishItem) => items.isComplete
+];
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
   items : WishItem[] = [
     new WishItem("Learn Angular"),
@@ -19,22 +26,11 @@ export class AppComponent {
   ];
 
   title = 'Testing';
-
   newWishText: string = "";
-  listFilter: string = "0";
+  listFilter: any = "0";
 
   get visibleItems(): WishItem[] {
-    let value = this.listFilter;
-
-    if (value === "0") {
-      return this.items;
-    } else if (value === "1") {
-      return this.items.filter(item => !item.isComplete);
-    } else if (value === "2") {
-      return this.items.filter(item => item.isComplete);
-    }
-
-    return [];
+    return this.items.filter(filters[this.listFilter]);
   }
 
   addNewWish() {
