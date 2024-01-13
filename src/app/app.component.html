@@ -1,13 +1,26 @@
 <div class="container">
+  <form class="row mt-3 mb-5 gx-2 gy-3 align-items-center justify-content-center">
+    <div class="col-sm-6">
+      <label for="specificSizeInputName" class="visually-hidden"></label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+
   <div *ngIf="items.length === 0; else showItems">
     <p>There are no wishes to display</p>
   </div>
 
   <ng-template #showItems>
     <ul *ngIf="items.length > 0" class="wish-list">
-      <li class="form-check" *ngFor="let item of items">
+      <li class="form-check" *ngFor="let item of items; index as i">
         <label class="form-check-label">
-          <input type="checkbox" class="checkbox">
+          <input type="checkbox" class="checkbox"
+            [checked]="item.isComplete"
+            [attr.data-index]="i"
+            (click)="toggleItem(item)">
           {{ item.text }}
         </label>
       </li>
