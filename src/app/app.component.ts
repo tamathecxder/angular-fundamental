@@ -12,10 +12,16 @@ import { WishItem } from '../shared/models/wishitem';
 })
 export class AppComponent {
   items : WishItem[] = [
-    // new WishItem("Learn Angular"),
-    // new WishItem("Museum Date"),
-    // new WishItem("Take a nap", true)
+    new WishItem("Learn Angular"),
+    new WishItem("Museum Date"),
+    new WishItem("Take a nap", true)
   ];
 
   title = 'Testing';
+
+  toggleItem(item: WishItem) {
+    item.isComplete = !item.isComplete;
+
+    console.log(item);
+  }
 }
