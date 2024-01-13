@@ -1,22 +1,35 @@
 <div class="container">
-  <form class="row mt-3 mb-2 gx-2 gy-3 align-items-center justify-content-center">
-    <div class="col-sm-6">
-      <label for="specificSizeInputName" class="visually-hidden"></label>
-      <input type="text" class="form-control" name="wish_text" [(ngModel)]="newWishText">
+  <div class="d-flex align-items-start flex-column p-3">
+    <form class="w-100 row mt-3 mb-2 gx-2 gy-3 align-items-center justify-content-start">
+      <div class="col-sm-6">
+        <label for="specificSizeInputName" class="visually-hidden"></label>
+        <input type="text" class="form-control" name="wish_text" [(ngModel)]="newWishText">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary" (click)="$event.preventDefault(); addNewWish();">Submit</button>
+      </div>
+    </form>
+
+    <div class="w-100 row mt-3 mb-2 gx-2 gy-3 align-items-center justify-content-start">
+      <div class="col-sm-3">
+        <label for="listFilter" class="form-label">Select Filter:</label>
+        <select name="list_filter" id="listFilter" [(ngModel)]="listFilter" (ngModelChange)="filterChanged($event)" class="form-select">
+          <option value="0">All</option>
+          <option value="1">Unfulfilled</option>
+          <option value="2">Fulfilled</option>
+        </select>
+      </div>
     </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-primary" (click)="$event.preventDefault(); addNewWish();">Submit</button>
-    </div>
-  </form>
+  </div>
 
   <div class="row mt-3">
-    <div *ngIf="items.length === 0; else showItems">
+    <div *ngIf="visibleItems.length === 0; else showItems">
       <p>There are no wishes to display</p>
     </div>
 
     <ng-template #showItems>
       <ul *ngIf="items.length > 0" class="wish-list">
-        <li class="form-check" *ngFor="let item of items; index as i">
+        <li class="form-check" *ngFor="let item of visibleItems; index as i">
           <label class="form-check-label">
             <input type="checkbox" class="checkbox"
               [checked]="item.isComplete"
