@@ -23,22 +23,6 @@
   </div>
 
   <div class="row mt-3">
-    <div *ngIf="visibleItems.length === 0; else showItems">
-      <p>There are no wishes to display</p>
-    </div>
-
-    <ng-template #showItems>
-      <ul *ngIf="items.length > 0" class="wish-list">
-        <li class="form-check" *ngFor="let item of visibleItems; index as i">
-          <label class="form-check-label">
-            <input type="checkbox" class="checkbox"
-              [checked]="item.isComplete"
-              [attr.data-index]="i"
-              (click)="toggleItem(item)">
-            {{ item.text }}
-          </label>
-        </li>
-      </ul>
-    </ng-template>
+    <wish-list [wishes]="visibleItems"></wish-list>
   </div>
 </div>
