@@ -22,23 +22,24 @@ export class AppComponent {
 
   newWishText: string = "";
   listFilter: string = "0";
-  visibleItems: WishItem[] = this.items;
+
+  get visibleItems(): WishItem[] {
+    let value = this.listFilter;
+
+    if (value === "0") {
+      return this.items;
+    } else if (value === "1") {
+      return this.items.filter(item => !item.isComplete);
+    } else if (value === "2") {
+      return this.items.filter(item => item.isComplete);
+    }
+
+    return [];
+  }
 
   addNewWish() {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = "";
-  }
-
-  filterChanged(value: any) {
-    console.log(value);
-
-    if (value === "0") {
-      this.visibleItems = this.items;
-    } else if (value === "1") {
-      this.visibleItems = this.items.filter(item => !item.isComplete);
-    } else if (value === "2") {
-      this.visibleItems = this.items.filter(item => item.isComplete);
-    }
   }
 
   toggleItem(item: WishItem) {
