@@ -1,0 +1,9 @@
+<form class="w-100 row mt-3 mb-2 gx-2 gy-3 align-items-center justify-content-start">
+  <div class="col-sm-6">
+    <label for="specificSizeInputName" class="visually-hidden"></label>
+    <input type="text" class="form-control" name="wish_text" [(ngModel)]="newWishText">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary" (click)="$event.preventDefault(); addNewWish();">Submit</button>
+  </div>
+</form>
