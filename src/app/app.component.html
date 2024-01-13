@@ -1,5 +1,7 @@
 <div class="container">
-  <div *ngIf="items.length === 0; else showItems"></div>
+  <div *ngIf="items.length === 0; else showItems">
+    <p>There are no wishes to display</p>
+  </div>
 
   <ng-template #showItems>
     <ul *ngIf="items.length > 0" class="wish-list">
